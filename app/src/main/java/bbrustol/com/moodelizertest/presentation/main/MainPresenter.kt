@@ -30,6 +30,15 @@ class MainPresenter : MainContract.Presenter {
         mView.setBG(gradient)
     }
 
+    private fun verifyMinMaxColor(num: Float): Float {
+        if (num >= 255) {
+            return MAX_COLOR
+        } else if (num <= 0) {
+            return MIN_COLOR
+        }
+        return num
+    }
+
     override fun onActionDown(motionEvent: MotionEvent, view: View) {
         posXViewInit = motionEvent.rawX - view.width / 2
         posYViewInit = motionEvent.rawY - view.height
@@ -57,46 +66,16 @@ class MainPresenter : MainContract.Presenter {
         var greenEnd = (((colorXPercent * colorYPercent) / 1) * MAX_COLOR) * -1 + MAX_COLOR
         var blueEnd = ((colorYPercent * 1) * MAX_COLOR) * -1 + MAX_COLOR
 
-        if (redStart >= 255) {
-            redStart = MAX_COLOR
-        }else if (redStart <= 0) {
-            redStart = MIN_COLOR
-        }
-
-        if (greenStart >= 255) {
-            greenStart = MAX_COLOR
-        }else if (greenStart <= 0) {
-            greenStart = MIN_COLOR
-        }
-
-        if (blueStart >= 255) {
-            blueStart = MAX_COLOR
-        }else if (blueStart <= 0) {
-            blueStart = MIN_COLOR
-        }
-
-        if (redEnd >= 255) {
-            redEnd = MAX_COLOR
-        }else if (redEnd <= 0) {
-            redEnd = MIN_COLOR
-        }
-
-        if (greenEnd >= 255) {
-            greenEnd = MAX_COLOR
-        }else if (greenEnd <= 0) {
-            greenEnd = MIN_COLOR
-        }
-
-        if (blueEnd >= 255) {
-            blueEnd = MAX_COLOR
-        }else if (blueEnd <= 0) {
-            blueEnd = MIN_COLOR
-        }
+        redStart = verifyMinMaxColor(redStart)
+        greenStart = verifyMinMaxColor(greenStart)
+        blueStart = verifyMinMaxColor(blueStart)
+        redEnd = verifyMinMaxColor(redEnd)
+        greenEnd = verifyMinMaxColor(greenEnd)
+        blueEnd = verifyMinMaxColor(blueEnd)
 
         setGradient(redStart.toInt(), greenStart.toInt(), blueStart.toInt(),
                     redEnd.toInt() , greenEnd.toInt(), blueEnd.toInt())
     }
-
     override fun setup(activity: MainActivity) {
         mView = activity
         setGradient(100, 50, 127,

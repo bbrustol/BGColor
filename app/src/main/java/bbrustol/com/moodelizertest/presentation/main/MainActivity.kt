@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity(), MainContract.ViewContract {
             }
 
             MotionEvent.ACTION_MOVE -> {
-                mPresenter.onActionMove(motionEvent, view)
                 view.x = motionEvent.rawX - view.width / 2
                 view.y = motionEvent.rawY - view.height
 

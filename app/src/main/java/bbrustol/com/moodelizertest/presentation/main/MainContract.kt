@@ -10,7 +10,6 @@ interface MainContract {
 
     interface Presenter {
         fun onActionDown(motionEvent: MotionEvent, view: View)
-        fun onActionMove(motionEvent: MotionEvent, view: View)
         fun calcBGColor(view: View)
         fun setup(activity: MainActivity)
     }

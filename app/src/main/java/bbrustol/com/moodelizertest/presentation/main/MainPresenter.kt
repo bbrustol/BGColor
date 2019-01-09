@@ -50,10 +50,6 @@ class MainPresenter : MainContract.Presenter {
         }
     }
 
-    override fun onActionMove(motionEvent: MotionEvent, view: View) {
-
-    }
-
     override fun calcBGColor(view: View) {
         val colorXPercent: Float = ((view.x / posXInit) / 2)
         val colorYPercent: Float = ((((view.y / posYInit) / 2) * -1) + 1)
@@ -76,6 +72,7 @@ class MainPresenter : MainContract.Presenter {
         setGradient(redStart.toInt(), greenStart.toInt(), blueStart.toInt(),
                     redEnd.toInt() , greenEnd.toInt(), blueEnd.toInt())
     }
+
     override fun setup(activity: MainActivity) {
         mView = activity
         setGradient(100, 50, 127,
